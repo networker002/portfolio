@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" translate="yes">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to NetWorkErrSpace! | Main</title>
+</head>
+<body>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            --text-color: #fff;
+        }
+
+        :root {
+            color: var(--text-color)
+        }
+
+        body {
+            background: #00081a;
+            min-height: 100vh;
+
+            /* &::before {
+                content: "";
+                position: fixed;
+                width: 30vw;
+                height: 30vw;
+                background:linear-gradient(90deg, rgb(93, 2, 146) , rgba(0, 0, 255, 0.51) );
+                border-radius: 50%;
+                filter: blur(56px) opacity(30%);
+                opacity: .75;
+                z-index: -1;
+            } */
+        }
+
+        header {
+            display: flex;
+            background: rgba(79, 101, 197, 0.15);
+            backdrop-filter: blur(12px);
+            position:sticky;
+            top:0;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em;
+
+            .name-title {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-weight: 900;
+                letter-spacing: 1px;
+                font-size: 2em;
+                filter: drop-shadow(0 0 10px rgba(204, 201, 186, 0.6));
+                span {
+                    color: rgb(0, 255, 128);
+                    letter-spacing: 2px;
+                    font-weight: bold;
+                }
+
+                padding-left: 2vh;
+            }
+
+            .nav-title {
+                font-family: monospace;
+                font-size: calc(12px + .5vw);
+                padding-right: 2vh;
+                ul {
+                    display: flex;
+                    gap: 2em;
+                    list-style: none;
+                }
+                a {
+                    text-decoration: none;
+                    color: var(--text-color);
+                    position: relative;
+                    transition: filter .5s;
+
+                    &:hover {
+                        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+                    }
+
+
+                    &::before {
+                        position: absolute;
+                        bottom: -2px;
+                        left: 50%;
+                        width: 0;
+                        content: "";
+                        height: 4px;
+                        background: rgb(0, 255, 128);
+                        /* background: linear-gradient(to left, rgba(136, 255, 0, 0.308), rgba(82, 185, 14, 0.466)); */
+                        border-radius: 10px;
+                        transition: all 1s ease;
+                    }
+
+                    &:hover::before {
+                        left: 0;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        .bubbles div {
+            position: absolute;
+            border-radius: 50%;
+            opacity: .75;
+            filter: blur(150px) opacity(50%);
+            position: fixed;
+            animation: InfMoving infinite 10s;
+        }
+
+        @keyframes InfMoving {
+            50% {
+                transform: scale(1.5);
+                
+            }
+        }
+
+        .bubble-1 {
+            background-color: rgb(218, 48, 48);
+        }
+
+        .bubble-2 {
+            background-color: rgb(99, 235, 99);
+        }
+
+        .bubble-3 {
+            background-color:  purple;
+        }
+
+        .bubble-4 {
+            background-color: white;
+        }
+
+        .intro {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            font-family: system-ui;
+
+            h1 {
+                color: rgb(0, 255, 128);
+                text-shadow: 2px 2px 12px #000;
+                color-scheme: initial;
+                font-weight: 900;
+            }
+
+            p {
+                color: #fff;
+                z-index: 1;
+            }
+
+            .me-intro {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                font-size: calc(12px + .4vw);
+                margin-top: 40vh;
+            }
+        }
+
+        .code-intro {
+            height: calc(100vh - 20%);
+            display: flex;
+            align-items: center;
+            transform: rotateY(20deg);
+        }
+
+        .code-area {
+            background-color: rgb(30, 30, 40);
+            border-radius: 10px;
+            border: 2px solid rgb(1, 2, 3);
+            position: relative;
+
+            width: 60vh;
+            height: 60vh;
+
+            padding: 2em;
+
+            &::before {
+                position: absolute;
+                top: -2px;
+                content: "";
+                width: 100%;
+                height: 32px;
+                border-radius: 10px 10px 0 0;
+                border: 2px solid #0e0e1a;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #0e0e1a;
+            }
+
+            p {
+                position: absolute;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                content: "";
+                background: #fff;
+                top: 4px;
+
+                &:first-child {
+                    left: 4px;
+                    background-color: red;
+
+                }
+
+                &:nth-child(2) {
+                    background: yellow;
+                }
+
+                &:last-child {
+                    transform: translateX(28px);
+                    background: rgb(0, 255, 0);
+                }
+        }
+    }
+    </style>
+    <div class="bubbles">
+        <script>   
+            var a = Math.round(Math.random() * 4);
+            if (a === 0){
+                a = 2;
+            } else if (a === 1) { a = 2; };
+
+            var forms  =  ["30vw", "20vw", "40vw"];
+            var goes = ["left: 0", "right: 0", "bottom: 0", "left: 50%", "right: 50%"];
+            var newFragment = document.querySelector(".bubbles");
+            for (let i = 0  ; i <= a; i++) {
+                var rIx = Math.floor(Math.random() * (forms.length - 1));
+                var rndWH = forms[rIx];
+                var RIIx = Math.floor(Math.random() * (goes.length - 1));
+                var div = document.createElement("div");
+                div.className = "bubble-"+(i+1);
+                div.style = goes[RIIx];
+                div.style.width = rndWH;
+                div.style.height = rndWH;
+                newFragment.appendChild(div);
+            }
+            
+
+        </script>
+    </div>
+    <header>
+        <div class="name-title">
+            <p><span id="dev-span">Dev</span> networker002</p>
+        </div>
+        <nav class="nav-title">
+            <ul>
+                <li><a href="">About</a></li>
+                <li><a href="">Skills</a></li>
+                <li><a href="">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="intro">
+            <div class="me-intro">
+                <h1>YOUNG OLD DEVELOPER</h1>
+                <p id="intro-text" style="height:1.4em; font-size: 2em; font-family: monospace;"></p>
+                <p>Welcome to my portfolio page. I am always improving <br>Let's start!</p>
+            </div>
+            <div class="code-intro">
+                <div class="code-area">
+                    <code><p></p>
+                    <p></p>
+                    <p></p>
+                    </code>
+                </div>
+            </div>
+            <script>
+                var codeLine = document.getElementById("intro-text");
+                var elss = ['Making a future', 'Coding', "Creating useful apps"];
+                // for (let i = 0; i <= (elss.length-1); i++) {
+                //     setTimeout(function(){ codeLine.innerHTML += elss[i];}, 1000);
+                // };
+                let phraseIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+
+        function type() {
+            const currentPhrase = elss[phraseIndex];
+            
+            if (isDeleting) {
+                codeLine.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                codeLine.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % elss.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 100 : 200);
+            }
+        }
+
+        type()
+            </script>
+        </div>
+    </main>
+</body>
+</html>
