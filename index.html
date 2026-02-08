@@ -4,22 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to NetWorkErrSpace! | Main</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
     <style>
         *{
             padding: 0;
             margin: 0;
             --text-color: #fff;
+            box-sizing: border-box;
         }
 
         :root {
-            color: var(--text-color)
+            color: var(--text-color);
+            --w-after-ab: 0%;
+            --anim-1: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             background: #00081a;
             min-height: 100vh;
+            overflow-x: hidden;
 
             /* &::before {
                 content: "";
@@ -43,12 +51,14 @@
             justify-content: space-between;
             align-items: center;
             padding: 1em;
+            z-index: 1;
 
             .name-title {
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
                 font-weight: 900;
                 letter-spacing: 1px;
                 font-size: 2em;
+                transition: all .75s ease;
                 filter: drop-shadow(0 0 10px rgba(204, 201, 186, 0.6));
                 span {
                     color: rgb(0, 255, 128);
@@ -63,16 +73,19 @@
                 font-family: monospace;
                 font-size: calc(12px + .5vw);
                 padding-right: 2vh;
+                
                 ul {
                     display: flex;
                     gap: 2em;
                     list-style: none;
+                    transition: all .75s ease;
                 }
                 a {
                     text-decoration: none;
                     color: var(--text-color);
                     position: relative;
                     transition: filter .5s;
+                    cursor: pointer;
 
                     &:hover {
                         filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
@@ -107,6 +120,7 @@
             filter: blur(150px) opacity(50%);
             position: fixed;
             animation: InfMoving infinite 10s;
+            z-index: -1;
         }
 
         @keyframes InfMoving {
@@ -136,6 +150,7 @@
             display: grid;
             grid-template-columns: 50% 50%;
             font-family: system-ui;
+            min-height: 100vh;
 
             h1 {
                 color: rgb(0, 255, 128);
@@ -162,7 +177,7 @@
             height: calc(100vh - 20%);
             display: flex;
             align-items: center;
-            transform: rotateY(20deg);
+
         }
 
         .code-area {
@@ -171,10 +186,18 @@
             border: 2px solid rgb(1, 2, 3);
             position: relative;
 
-            width: 60vh;
-            height: 60vh;
+            width: 30vw;
+            height: 30vw;
 
             padding: 2em;
+
+            transition: all .5s;
+            transform: rotateY(15deg) skew(1deg);
+            filter: drop-shadow(10px 10px 30px rgba(255, 255, 255, 0.3));
+
+        &:hover {
+            transform: rotateY(0deg);
+        }
 
             &::before {
                 position: absolute;
@@ -214,13 +237,333 @@
                 }
         }
     }
+
+    .code-py {
+        letter-spacing: 1px;
+        padding-top: 5px;
+        font-family: monospace;
+        font-size: larger;
+    }
+
+.python-n { color: #9cdcfe; }
+.python-m { color: #c586c0; }
+.python-f { color: #dcdcaa; }
+.python-k { color: #569cd6; }
+.python-s { color: #ce9178; }
+.python-l { color: #b5cea8; }
+.python-d { color: #c586c0; font-weight: bold; }
+.python-t { color: #ce9178; }
+.python-o { color: #d4d4d4; }
+.python-c { color: #6a9955; font-style: italic; }
+.python-x { color: rgb(28, 185, 138);}
+.python-p { color: #808080; }
+
+.about {
+    text-align: center;
+    padding: 1rem;
+    h1 {
+        color: rgb(0, 255, 128);
+        font-family: system-ui;
+        font-weight: 800;
+        position: relative;
+        padding: .5em;
+
+        &::before {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(to left, #fff, #fff);
+            content: "";
+        }
+
+        
+
+        &::after {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: var(--w-after-ab);
+            height: 2px;
+            background: linear-gradient(to left, rgb(150, 255, 100), rgb(100, 155, 100));
+            content: "";            
+        }
+    }
+
+    p {
+        padding: 2px;
+        font-size: larger;
+        
+        &:first-of-type {
+            margin-top: 2em;
+        }
+    }
+}
+
+#about-ht {
+    list-style: none; display: flex; gap: 1em; justify-content: center;
+    opacity: .5;
+    li {&::before {
+        content: "#";
+    } }
+}
+
+.cards-about {
+    display: flex;
+    flex-direction:  row;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+    margin: 5rem 0;
+    transition: transform 1s ease;
+    
+
+    div {
+    width: 280px;
+    height: 360px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 28px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.85s cubic-bezier(0.23, 1, 0.320, 1), background 1s ease;
+    cursor: pointer;
+        
+    
+        h1 {
+              font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-weight: 800;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        background: linear-gradient(135deg, 
+        #b3ff00 0%, 
+        #7cbb16 25%, 
+        #2dce0d 50%, 
+        #0e9915 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0 0 1rem 0;
+        filter: drop-shadow(0 4px 12px rgba(193, 251, 253, 0.2));
+        position: relative;
+        z-index: 2;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+        h1::before {content: none;}
+        h1::after {content: none;}
+
+        p {
+            color: white;
+            filter: drop-shadow(0 0 10px rgba(82, 255, 82, .7));
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.65);
+            letter-spacing: 1px;
+            font-family: monospace;
+            font-size:1.3em;
+        }
+
+        &:hover {
+            background: black;
+            transform: scale(1.1);
+        }
+    }
+}
+
+.cards-about.scrolling-up {
+    transform: translateY(50px);
+}
+
+.cards-about.active {
+    transform: translateY(0);
+}
+
+.skills {
+    margin-top: 5rem;
+    padding-top: 4rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        color: rgb(0, 255, 128);
+        font-family: system-ui;
+        font-weight: 800;
+        position: relative;
+        padding: .5em;
+
+        &::before {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(to left, #fff, #fff);
+            content: "";
+        }
+
+        
+
+        &::after {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: var(--w-after-ab);
+            height: 2px;
+            background: linear-gradient(to left, rgb(150, 255, 100), rgb(100, 155, 100));
+            content: "";            
+        }
+    }
+    p{            
+        padding: 2px;
+        font-size: x-large;
+        font-family: system-ui, -apple-system;
+        position: relative;
+
+        &:first-of-type {
+            margin-top: 2em;
+            margin-bottom: 4rem;
+        }
+        &::before {
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 3px;
+            background-color: #2dce0d;
+            bottom: -100%;
+            animation: var(--anim-1);
+            opacity: 0;
+        }
+    }
+}
+
+@keyframes qw {
+    0% {
+        bottom: -100%;
+        opacity: 1;
+    }
+
+    100% {
+        bottom: -1000%;
+        opacity: 0;
+    }
+}
+
+.list-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px; /* 6em ≈ 40px */
+  justify-content: space-around;
+  padding: 20px;
+  align-items: flex-start;
+}
+
+.front, .back, .oth-tools {
+  flex: 0 1 320px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center; /* Центрирует содержимое секции */
+}
+
+.front i, .back i, .oth-tools i {
+  font-size: 2.5em;
+  color: rgb(0, 255, 128);
+  padding-top: 0.5em;
+  scale: 1.5;
+}
+
+h2 {
+  color: rgb(0, 255, 128);
+  font-family: 'Orbitron', monospace;
+  font-size: 1.4em;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.sk {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto; /* Центрирует сам .sk */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  padding: 15px 10px;
+  justify-content: center;
+  justify-items: center; /* ✅ Центрирует каждый li в своей колонке */
+  width: 100%;
+  max-width: 20vw; /* Фиксирует максимальную ширину сетки */
+}
+
+.sk li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(0, 255, 127, 0.05));
+  border: 1px solid rgba(0, 255, 127, 0.3);
+  border-radius: 10px;
+  padding: 12px 16px;
+  min-width: 130px; /* Гарантирует минимальную ширину li */
+  justify-content: center; /* Центрирует иконку+текст внутри li */
+  color: #22c55e;
+  font-weight: 500;
+  font-size: 0.9em;
+  font-family: 'Orbitron', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 4px 20px rgba(0, 255, 127, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Остальные стили без изменений */
+.sk li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 127, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.sk li:hover::before { left: 100%; }
+.sk li:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 30px rgba(0, 255, 127, 0.35);
+  border-color: #00ff7f;
+}
+
+.sk li i { font-size: 1.1em; color: #00ff7f; flex-shrink: 0; }
+
+/* Медиа-запросы */
+@media (max-width: 768px) {
+  .list-skills { flex-direction: column; gap: 80px; align-items: center;}
+  .sk { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+}
+
     </style>
-    <div class="bubbles">
-        <script>   
-            var a = Math.round(Math.random() * 4);
-            if (a === 0){
-                a = 2;
-            } else if (a === 1) { a = 2; };
+<body>
+    <div class="bubbles"></div>
+    <script>   
+            const a = Math.floor(Math.random() * 3) + 2; // 2-4
 
             var forms  =  ["30vw", "20vw", "40vw"];
             var goes = ["left: 0", "right: 0", "bottom: 0", "left: 50%", "right: 50%"];
@@ -237,17 +580,15 @@
                 newFragment.appendChild(div);
             }
             
-
         </script>
-    </div>
     <header>
         <div class="name-title">
             <p><span id="dev-span">Dev</span> networker002</p>
         </div>
         <nav class="nav-title">
             <ul>
-                <li><a href="">About</a></li>
-                <li><a href="">Skills</a></li>
+                <li><a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth', block:'center'})">About</a></li>
+                <li><a onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">Skills</a></li>
                 <li><a href="">Contact</a></li>
             </ul>
         </nav>
@@ -256,8 +597,8 @@
         <div class="intro">
             <div class="me-intro">
                 <h1>YOUNG OLD DEVELOPER</h1>
-                <p id="intro-text" style="height:1.4em; font-size: 2em; font-family: monospace;"></p>
-                <p>Welcome to my portfolio page. I am always improving <br>Let's start!</p>
+                <p id="intro-text" style="height:1.4em; font-size: 2em; font-family: monospace; letter-spacing: 1px;"></p>
+                <p>Welcome to my portfolio page. I am always improving <br><b>Let's start!</b></p>
             </div>
             <div class="code-intro">
                 <div class="code-area">
@@ -265,9 +606,81 @@
                     <p></p>
                     <p></p>
                     </code>
+                    <div class="code-py">
+<pre id="code-1">
+<span class="python-m">import</span> <span class="python-x">fastapi</span>
+<span class="python-m">import</span> <span class="python-x">sqlite3</span>
+
+<span class="python-n">app</span> = <span class="python-x">fastapi</span>.<span class="python-x">FastAPI</span>()
+
+<span class="python-f">@</span><span class="python-n">app</span>.<span class="python-f">get</span>(<span class="python-s">"/"</span>)
+<span class="python-k">def</span> <span class="python-f">show</span>() -&gt; <span class="python-x">list</span>:
+    <span class="python-n">conn</span> = <span class="python-x">sqlite3</span>.<span class="python-f">connect</span>(<span class="python-s">'my_database.db'</span>)
+    <span class="python-n">cursor</span> = <span class="python-n">conn</span>.<span class="python-f">cursor</span>()
+    <span class="python-n">cursor</span>.<span class="python-f">execute</span>(<span class="python-s">'''
+        CREATE TABLE IF NOT EXISTS products (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            price REAL
+        )
+    '''</span>)
+
+    <span class="python-n">data</span> = (<span class="python-s">'Laptop'</span>, <span class="python-l">1500.0</span>)
+    <span class="python-n">cursor</span>.<span class="python-f">execute</span>(
+        <span class="python-s">"INSERT INTO products (
+            name,price) VALUES (?, ?)"</span>, <span class="python-n">data</span>)
+
+    <span class="python-n">conn</span>.<span class="python-f">commit</span>()
+    <span class="python-n">cursor</span>.<span class="python-f">execute</span>(<span class="python-s">"SELECT * FROM products"</span>)
+    <span class="python-n">rows</span> = <span class="python-n">cursor</span>.<span class="python-f">fetchall</span>()
+    <span class="python-n">conn</span>.<span class="python-f">close</span>()
+
+    <span class="python-m">return</span> <span class="python-n">rows</span>
+
+</pre>
+
+<pre id="code-2">
+<span class="python-m">from</span> <span class="python-x">aiogram</span> <span class="python-m">import</span> <span class="python-x">Bot</span><span class="python-o">,</span> <span class="python-x">Dispatcher</span><span class="python-o">,</span> <span class="python-n">F</span>
+<span class="python-m">import</span> <span class="python-x">asyncio</span>
+
+<span class="python-n">dp</span> = <span class="python-x">Dispatcher</span>()
+
+<span class="python-f">@</span><span class="python-n">dp</span><span class="python-f">.message</span>(<span class="python-n">F</span><span class="python-n">.text</span> <span class="python-o">==</span> <span class="python-s">"/start"</span>)
+<span class="python-k">async</span> <span class="python-k">def</span> <span class="python-f">send_hello</span>(<span class="python-n">message</span><span class="python-o">:</span> <span class="python-m">types</span><span class="python-f">.Message</span>):
+    <span class="python-k">await</span> <span class="python-n">message</span>.<span class="python-f">answer</span> (
+        <span class="python-s">"Привет, "</span> + <span class='python-n'>message</span>.<span class="python-n">from_user</span>.<span class="python-n">first_name</span>
+        )
+
+<span class="python-k">async def</span> <span class="python-f">main</span>():
+        <span class="python-n">bot</span> = <span class="python-x">Bot</span>(<span class="python-n">token=</span><span class="python-t">"123456:QwErTy123"</span>)
+        <span class="python-m">await</span> <span class="python-n">dp</span>.<span class="python-f">start_polling</span>(<span class="python-n">bot</span>)
+
+<span class="python-m">if</span> <span class="python-n">__name__</span> == <span class="python-t">"__main__"</span>:
+    <span class="python-m">try</span>:
+        <span class="python-x">asyncio</span>.<span class="python-f">run</span>(<span class="python-f">main</span>())
+    <span class="python-m">except</span> (<span class="python-x">KeyboardInterrupt</span>, <span class="python-x">SystemExit</span>):
+        <span class="python-m">import</span> <span class="python-x">logging</span>
+        <span class="python-x">logging</span>.<span class="python-f">getLogger</span>(<span class="python-t">"LoggerMain"</span>).<span class="python-f">info</span>(
+            <span class="python-t">"Stopped"</span>
+            )
+</pre>
+                    </div>
                 </div>
             </div>
             <script>
+                window.addEventListener("scroll", function(){
+                    if (window.scrollY !== 0) {
+                        document.querySelector(".nav-title ul").style = "padding-right: 2em";
+                        document.querySelector(".name-title").style = "padding-left: 2em";
+                    }
+                         else {
+                            document.querySelector(".nav-title ul").style = "padding-right: 0em";
+                            document.querySelector(".name-title").style = "padding-left: 0em";
+                         }
+                    document.querySelector("body").style.setProperty("--w-after-ab", (1/((window.scrollY / window.scrollMaxY)+2)*100)+"%");
+                    document.querySelector(".code-area").style = "scale: "+1/((window.scrollY / window.scrollMaxY)+1)+";";
+                });
+
                 var codeLine = document.getElementById("intro-text");
                 var elss = ['Making a future', 'Coding', "Creating useful apps"];
                 // for (let i = 0; i <= (elss.length-1); i++) {
@@ -276,6 +689,8 @@
                 let phraseIndex = 0;
                 let charIndex = 0;
                 let isDeleting = false;
+
+
 
         function type() {
             const currentPhrase = elss[phraseIndex];
@@ -301,8 +716,144 @@
         }
 
         type()
+
+            var codeRnd = Math.floor(Math.random() * 2);
+
+            if (codeRnd === 0) {
+                document.getElementById("code-1").style.display = "none";
+            } else { 
+                document.getElementById("code-2").style.display = "none";
+            }
+
             </script>
         </div>
+
+    <div class="about" id="about">
+        <h1>About me</h1>
+        <p>I am motivated and detail-oriented <b>developer</b>. I started coding several years ago and still don't stop. Anyway, I read a lot of <i>books about programming and IT</i>, so my outlook is good.</p>
+        <p>Currently pursuing a degree in <b>Information Systems and Programming</b>.</p> <span style="opacity: .5;">< dev / ></span>
+        <p>I beleve in writing code that not only works but is also maintainable and scalable.</p>
+        <p><ul id="about-ht">
+            <li>programming</li>
+            <li>code</li>
+            <li>service</li>
+            <li>fullstack</li>
+            <li>begginer</li>
+        </ul></p>
+
+        <div class="cards-about">
+            <div>
+                <h1>>1000</h1>
+                <p>HOURS IN CODING IDEs</p>
+            </div>
+            <div>
+                <h1>3</h1>
+                <p>YEARS IN PROGRAMMING</p>
+            </div>
+            <div>
+                <h1>20+</h1>
+                <p>IT TECHNOLOGIES</p>
+            </div>
+            <div>
+                <h1>100</h1>
+                <p>COFFEES DRANK (JOKE)</p>
+            </div>
+        </div>
+    </div>  
+
+    <div class="skills" id="skills">
+        <div>
+            <h1>
+                My technology stack
+            </h1>
+            <p> 
+                Systems and tools that I use
+            </p>
+        </div>
+
+        <div class="list-skills">
+            <div class="front">
+                <i class="fa-solid fa-code"></i>
+                <section>
+                <h2>Full-stack</h2>
+                <ul class="sk">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JS</li>
+                    <li>FIGMA</li>
+                    <li>WORDPRESS</li>
+                    <li>PYTHON</li>
+                    <li>SQL</li>
+                    <li>PENTESTING</li>
+                </ul>
+                </section>
+            </div>
+            <div class="back">
+                <i class="fas fa-server"></i>
+                <section>
+                <h2>Python</h2>
+                <ul class="sk">
+                    <li>FASTAPI</li>
+                    <li>PANDAS</li>
+                    <li>NUMPY</li>
+                    <li>SQLITE3</li>
+                    <li>FLASK</li>
+                    <li>AIOGRAM</li>
+                    <li>REQUESTS</li>
+                    <li>PILLOW</li>
+                    <li>SUBPROCESS</li>
+                    <li>BEAUTIFULSOUP</li>
+                    <li>OPENPYXL</li>
+                    <li>PYTHON-PPTX</li>
+                    <li>JSON</li>
+                    <li>UNITTEST</li>
+                </ul>
+                </section>
+            </div>
+            <div class="oth-tools">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <section>
+                <h2>Tools & More</h2>
+                <ul class="sk">
+                    <li>GIT</li>
+                    <li>MICROSOFT OFFICE</li>
+                    <li>BLENDER 3D</li>
+                    <li>KALI LINUX TOOLS</li>
+                </ul>
+                </section>
+            </div>
+        </div>
+    </div>
     </main>
+    <script>
+        let lastScroll = 0;
+        cardsAbout = document.querySelector(".cards-about");
+
+        function handleScroll(){
+        const elTop = cardsAbout.getBoundingClientRect().top;
+        const elBottom = cardsAbout.getBoundingClientRect().bottom;
+        const currentScroll = window.pageYOffset;
+        const scrollDirection = currentScroll > lastScroll ? 'down' : 'up';
+        lastScroll = currentScroll;
+
+        if (elTop < window.innerHeight && elBottom > 0) {
+            if (scrollDirection === "down") {
+                cardsAbout.classList.add("active");
+                cardsAbout.classList.remove("scrolling-up");
+            } else {
+                cardsAbout.classList.add("scrolling-up");
+                cardsAbout.classList.remove("active");
+            }
+        }
+    }
+        let isScrolling;
+        window.addEventListener("scroll", () => {
+            window.clearTimeout(isScrolling);
+            isScrolling = setTimeout(handleScroll, 10);
+
+        }, false);
+
+        handleScroll();
+</script>
 </body>
 </html>
