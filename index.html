@@ -20,6 +20,7 @@
         --w-after-ab: 0%;
         --anim-1: none;
         --btn-color: rgb(35, 223, 151);
+        --bg-online-color: #ff0000;
     }
 
     html {
@@ -437,6 +438,7 @@
         margin: 3rem auto;
         padding: 0 1rem;
         max-width: 1200px;
+        transition: transform 2s;
     }
 
     @media (max-width: 768px) {
@@ -447,6 +449,14 @@
         #code-2 {
         padding-left: 0rem;
         }
+    }
+
+    .cards-about.scrolling-up {
+        transform: translateY(40%);
+    }
+
+    .cards-about.active {
+        transform: translateY(0);
     }
 
     .cards-about div {
@@ -472,6 +482,9 @@
     @media (min-width: 768px) {
         .cards-about div {
             height: 320px;
+        }
+        .cards-about.scrolling-up {
+        transform: translateY(20%);
         }
     }
 
@@ -594,6 +607,7 @@
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
         gap: 0.8rem;
         justify-items: center;
+        transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 2s;
     }
 
     .sk li {
@@ -629,6 +643,14 @@
         color: #00ff7f;
     }
 
+    .sk.scrolling-up {
+        transform: translateY(30%);
+    }
+
+    .sk.active {
+        transform: translateY(0%);
+    }
+
     @media (hover: none) and (pointer: coarse) {
         .cards-about div:hover,
         .sk li:hover {
@@ -658,6 +680,10 @@
         .sk {
             grid-template-columns: 1fr;
         }
+
+        .sk.scrolling-up {
+            opacity: 0;
+        }
         
         .cards-about div {
             height: 250px;
@@ -671,6 +697,120 @@
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
         }
+    }
+
+    .contact {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        margin: auto 2rem;
+        gap: 1rem;
+
+        h1 {
+            color: var(--btn-color);
+            filter: drop-shadow(1px 1px 12px rgba(35, 223, 151, .5));
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                height: 2px;
+                width: calc(4em + 10vw);
+                background: #fff;
+                margin-bottom: -1rem;
+                filter: opacity(90%) drop-shadow(0 4px 6px rgb(127, 185, 109));
+            }
+        }
+    }
+
+    .contact > div {
+        display: flex;
+        justify-content: center;
+        gap: 2em;
+        margin: 2rem auto;
+
+        .ct-t {
+            padding: .75rem;
+            font-size: larger;
+            background: #3275549a;
+            text-align: center;
+            border-radius: 2em;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            font-weight: 550;
+            transition: all cubic-bezier(0.42, 0, 0.58, 1.0) .3s;
+
+            &:hover {
+                background: #22c55e;
+            }
+            
+            i {
+                padding: 0rem .75em 0 0;
+            }
+        }
+    }
+
+    @keyframes Onlinef {
+        0% {
+            background: none;
+        }
+
+        50% {
+            background: var(--bg-online-color);
+        }
+
+        100% {
+            background: none;
+        }
+    }
+
+    #cont24 {
+        font-size: x-large;
+        color: #569cd6;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        text-shadow: 1px 1px .25em rgba(255, 255, 255, 0.35);
+        padding: 1rem;
+
+        i {
+            position: relative;
+        }
+
+        i::before {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(-200%, -50%);
+            content: "";
+            background: var(--bg-online-color);
+            width: .5em;
+            height: .5em;
+            border-radius: 50%;
+            animation: Onlinef infinite 3s steps(1);
+            filter: drop-shadow(0 0 4px var(--bg-online-color));
+        }
+        span {
+            color:#00ff7f;
+        }
+
+        &:last-child {
+            padding-top: 2rem;
+        }
+    }
+
+    footer {
+        background: linear-gradient(to bottom, rgb(19, 19, 19), black);
+        padding: 2rem;
+        text-align: center;
+        margin-top: 3rem;
+        position: static;
+        bottom: 0;
+        z-index: -1;
+        font-family: system-ui;
+        letter-spacing: 1px;
     }
 </style>
 <body>
@@ -727,7 +867,7 @@
             <ul>
                 <li><a onclick="setBlockTimeout('about')">About</a></li>
                 <li><a onclick="setBlockTimeout('skills')">Skills</a></li>
-                <li><a href="">Contact</a></li>
+                <li><a onclick="setBlockTimeout('contact')">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -854,7 +994,7 @@
             }
         }
 
-        type()
+        type();
 
             var codeRnd = Math.floor(Math.random() * 2);
 
@@ -963,36 +1103,69 @@
             </div>
         </div>
     </div>
+    <div class="contact" id="contact">
+        <h1>Contact me</h1>
+        <div>
+            <div class="ct-t"><i class="fa-brands fa-github"></i>GitHub</div>
+            <div class="ct-t"><i class="fa-brands fa-telegram"></i>Telegram</div>
+            <div class="ct-t"><i class="fa-solid fa-envelope"></i>Email</div>
+        </div>
+        <section>
+            <p>I am always open to interesting projects, collaboration opportunities.</p>
+            <p id="cont24"><i></i><span>ONLINE</span> 24/7</p>
+        </section>
+    </div>
     </main>
-    <script>
-        let lastScroll = 0;
-        cardsAbout = document.querySelector(".cards-about");
+    <footer>
+        2026
+    </footer>
+        <script>
+    let lastScrollY = 0;
+    let ticking = false;
 
-        function handleScroll(){
-        const elTop = cardsAbout.getBoundingClientRect().top;
-        const elBottom = cardsAbout.getBoundingClientRect().bottom;
-        const currentScroll = window.pageYOffset;
-        const scrollDirection = currentScroll > lastScroll ? 'down' : 'up';
-        lastScroll = currentScroll;
+    function updateScrollAnimations() {
+        const scrollY = window.pageYOffset;
+        const scrollDir = scrollY > lastScrollY ? 'down' : 'up';
+        lastScrollY = scrollY;
 
-        if (elTop < window.innerHeight && elBottom > 0) {
-            if (scrollDirection === "down") {
-                cardsAbout.classList.add("active");
-                cardsAbout.classList.remove("scrolling-up");
-            } else {
-                cardsAbout.classList.add("scrolling-up");
-                cardsAbout.classList.remove("active");
+        document.querySelectorAll(".sk").forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                if (scrollDir === 'down') {
+                    el.classList.add("active");
+                    el.classList.remove("scrolling-up");
+                } else {
+                    el.classList.add("scrolling-up");
+                    el.classList.remove("active");
+                }
+            }
+        });
+
+        const cards = document.querySelector(".cards-about");
+        if (cards) {
+            const rect = cards.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                if (scrollDir === 'down') {
+                    cards.classList.add("active");
+                    cards.classList.remove("scrolling-up");
+                } else {
+                    cards.classList.add("scrolling-up");
+                    cards.classList.remove("active");
+                }
             }
         }
     }
-        let isScrolling;
-        window.addEventListener("scroll", () => {
-            window.clearTimeout(isScrolling);
-            isScrolling = setTimeout(handleScroll, 10);
 
-        }, false);
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollAnimations);
+            ticking = true;
+            setTimeout(() => ticking = false, 16);
+        }
+    }
 
-        handleScroll();
+    window.addEventListener("scroll", requestTick, { passive: true });
+    updateScrollAnimations(); 
 </script>
 </body>
 </html>
