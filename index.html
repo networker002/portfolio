@@ -15,7 +15,6 @@
     *{
         padding: 0;
         margin: 0;
-        --text-color: #fff;
         box-sizing: border-box;
     }
 
@@ -25,6 +24,7 @@
         --anim-1: none;
         --btn-color: rgb(35, 223, 151);
         --bg-online-color: #ff0000;
+        --text-color: #fff;
     }
 
     html {
@@ -634,6 +634,7 @@
         box-shadow: 0 4px 15px rgba(0, 255, 127, 0.15);
         transition: all 0.3s ease;
         text-align: center;
+        cursor: cell;
     }
 
     .sk li:hover {
@@ -655,53 +656,6 @@
         transform: translateY(0%);
     }
 
-    @media (hover: none) and (pointer: coarse) {
-        .cards-about div:hover,
-        .sk li:hover {
-            transform: none;
-        }
-        
-        .nav-title a:hover::before {
-            display: none;
-        }
-        
-        .code-area:hover {
-            transform: none;
-        }
-    }
-
-    @media (max-width: 360px) {
-        header {
-            flex-direction: column;
-            gap: 0.5rem;
-            padding: 0.8rem;
-        }
-        
-        .nav-title ul {
-            gap: 1rem;
-        }
-        
-        .sk {
-            grid-template-columns: 1fr;
-        }
-
-        .sk.scrolling-up {
-            opacity: 0;
-        }
-        
-        .cards-about div {
-            height: 250px;
-            padding: 1.5rem 1rem;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-        }
-    }
 
     .contact {
         text-align: center;
@@ -817,6 +771,54 @@
         letter-spacing: 1px;
     }
 
+        @media (hover: none) and (pointer: coarse) {
+        .cards-about div:hover,
+        .sk li:hover {
+            transform: none;
+        }
+        
+        .nav-title a:hover::before {
+            display: none;
+        }
+        
+        .code-area:hover {
+            transform: none;
+        }
+    }
+
+    @media (max-width: 360px) {
+        header {
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0.8rem;
+        }
+        
+        .nav-title ul {
+            gap: 1rem;
+        }
+        
+        .sk {
+            grid-template-columns: 1fr;
+        }
+
+        .sk.scrolling-up {
+            opacity: 0;
+        }
+        
+        .cards-about div {
+            height: 250px;
+            padding: 1.5rem 1rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
     @media (max-width:518px) {
         .contact > div {
             gap: 1em;
@@ -834,9 +836,29 @@
 
         @media (max-width:439px) {
         .ct-t {
-            
+            font-size:medium !important;
+            padding: 2vw !important;
         }
     }
+
+        @media (max-width:414px) {
+        .ct-t {
+            font-size:medium !important;
+            padding: 1vw !important;
+        }
+    }
+
+        @media (max-width:385px) {
+        .contact > div {
+            display: flex;
+            flex-wrap: wrap;
+
+            .ct-t {
+                padding: 2.5vw !important;
+            }
+        }}
+
+
 </style>
 <body>
     <div class="bubbles"></div>
@@ -993,33 +1015,28 @@
                 let phraseIndex = 0;
                 let charIndex = 0;
                 let isDeleting = false;
+                const TIME = 200;
 
+                function type() {
+                const currentPhrase = elss[phraseIndex];
+                if (isDeleting) {
+                    codeLine.textContent = currentPhrase.slice(0, --charIndex);
+                } else {
+                    codeLine.textContent = currentPhrase.slice(0, ++charIndex);
+                }
+                const wait = isDeleting ? 100 : TIME;
+                if (charIndex >= currentPhrase.length) {
+                    setTimeout(() => { isDeleting = true; type(); }, 2000);
+                } else if (charIndex <= 0) {
+                    phraseIndex = (phraseIndex + 1) % elss.length;
+                    isDeleting = false;
+                    setTimeout(type, 500);
+                } else {
+                    setTimeout(type, wait);
+                }
+                }
 
-
-        function type() {
-            const currentPhrase = elss[phraseIndex];
-
-            if (isDeleting) {
-                codeLine.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                codeLine.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                isDeleting = true;
-                setTimeout(type, 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % elss.length;
-                setTimeout(type, 500);
-            } else {
-                setTimeout(type, isDeleting ? 100 : 200);
-            }
-        }
-
-        type();
+            type();
 
             var codeRnd = Math.floor(Math.random() * 2);
 
@@ -1045,7 +1062,7 @@
             <li>beginner</li>
         </ul></p>
 
-<div class="cards-about">
+    <div class="cards-about">
             <div>
                 <h1>>1000</h1>
                 <p>HOURS IN CODING IDEs</p>
@@ -1144,11 +1161,12 @@
     <footer>
         2026
     </footer>
-        <script>
+    <script>
     let lastScrollY = 0;
     let ticking = false;
 
     function updateScrollAnimations() {
+        if (window.screen.width > 1600){
         const scrollY = window.pageYOffset;
         const scrollDir = scrollY > lastScrollY ? 'down' : 'up';
         lastScrollY = scrollY;
@@ -1178,7 +1196,7 @@
                     cards.classList.remove("active");
                 }
             }
-        }
+        }} else {}
     }
 
     function requestTick() {
@@ -1188,9 +1206,9 @@
             setTimeout(() => ticking = false, 16);
         }
     }
-    if (window.screen.width > 768) {
+
     window.addEventListener("scroll", requestTick, { passive: true });
-    updateScrollAnimations(); } else {}
+    updateScrollAnimations(); 
 </script>
 </body>
 </html>
