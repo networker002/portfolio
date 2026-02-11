@@ -812,6 +812,27 @@
         font-family: system-ui;
         letter-spacing: 1px;
     }
+
+    @media (max-width:518px) {
+        .contact > div {
+            gap: 1em;
+        }
+        .ct-t {
+            padding: 2vw !important;
+        }
+    }
+
+    @media (max-width:505px) {
+        .ct-t {
+            padding: 1vw !important;
+        }
+    }
+
+        @media (max-width:439px) {
+        .ct-t {
+            
+        }
+    }
 </style>
 <body>
     <div class="bubbles"></div>
@@ -1163,9 +1184,9 @@
             setTimeout(() => ticking = false, 16);
         }
     }
-
+    if (window.screen.width > 768) {
     window.addEventListener("scroll", requestTick, { passive: true });
-    updateScrollAnimations(); 
+    updateScrollAnimations(); } else {}
 </script>
 </body>
 </html>
