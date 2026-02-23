@@ -3,7 +3,7 @@ ____
 This is my personal portfolio website | GitHub | Dev
 ____
 
-[Site](https://networker002.github.io/portfolio)
+[Site](https://networker002.github.io)
 
 ## Include
 - HTML 5
